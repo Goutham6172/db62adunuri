@@ -14,8 +14,20 @@ exports.food_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: Food detail: ' + req.params.id);
 };
 // Handle Food create on POST.
-exports.food_create_post = function(req, res) {
-res.send('NOT IMPLEMENTED: Food create POST');
+exports.food_create_post = async function(req,res){
+    console.log(req.body)
+    let document = new Food();
+
+    document.foodquantity = req.body.foodquantity;
+    document.foodprice = req.body.foodprice;
+    document.foodcolor = req.body.foodcolor;
+    try{
+        let result = await document.save();
+        res.send(result);
+    }
+    catch(err){
+        res.error(500,`{"error":${err}}`);
+    }
 };
 // Handle Food delete form on DELETE.
 exports.food_delete = function(req, res) {
