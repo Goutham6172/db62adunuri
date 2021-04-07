@@ -1,8 +1,14 @@
 var Food = require('../models/food');
 // List of all Food
-exports.food_list = function(req, res) {
-res.send('NOT IMPLEMENTED: Food list');
-};
+exports.food_list =async function(req, res) {
+    try{
+    thefood = await Food.find();
+    res.send(thefood);
+    }
+    catch(err){
+        res.error(500,`{"error":${err}}`);
+    }
+    };
 // for a specific Food.
 exports.food_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: Food detail: ' + req.params.id);
