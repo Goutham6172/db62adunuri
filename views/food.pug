@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= title
-  - let food = [{foodquantity:"Full", foodprice: 100, foodcolor:"Yellow"},{foodquantity:"Small", foodprice: 64, foodcolor:"Red"},{foodquantity:"Medium", foodprice: 22, foodcolor:"Orange"}]
+  - let food = results
   div(class="container-fluid mt-3")
   div(class="row")
     each f,index in food

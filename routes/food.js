@@ -1,9 +1,8 @@
 var express = require('express');
+const foodcontroller = require('../controllers/food')
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('food', { title: "food Search Results" });
-});
+/* GET Foods. */
+router.get('/', foodcontroller.food_view_all_Page);
 
 module.exports = router;

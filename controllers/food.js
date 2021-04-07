@@ -25,3 +25,16 @@ res.send('NOT IMPLEMENTED: Food delete DELETE ' + req.params.id);
 exports.food_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: food update PUT' + req.params.id);
 };
+
+
+// VIEWS
+// Handle a show all view
+exports.food_view_all_Page = async function(req, res) {
+    try{
+    thefood = await Food.find();
+    res.render('food', { title: 'Food Search Results', results: thefood });
+    }
+    catch(err){
+    res.error(500,`{"error": ${err}}`);
+    }
+    };
