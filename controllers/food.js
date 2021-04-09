@@ -10,9 +10,19 @@ exports.food_list =async function(req, res) {
     }
     };
 // for a specific Food.
-exports.food_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Food detail: ' + req.params.id);
+exports.food_detail = async function(req,res){
+    console.log("detail"+req.params.id)
+    try{
+        result = await Food.findById(req.params.id)
+        res.send(result)
+    }catch(error){
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found}`)
+    }
 };
+
+
+
 // Handle Food create on POST.
 exports.food_create_post = async function(req,res){
     console.log(req.body)
@@ -34,8 +44,22 @@ exports.food_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Food delete DELETE ' + req.params.id);
 };
 // Handle Food update form on PUT.
-exports.food_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: food update PUT' + req.params.id);
+exports.food_update_put = async function(req,res){
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
+    try{
+        let toUpdate = await Food.findById(req.params.id)
+
+        if(req.body.foodcolor) toUpdate.foodcolor = req.body.foodcolor;
+        if(req.body.foodquantity) toUpdate.foodquantity = req.body.foodquantity;
+        if(req.body.foodprice) toUpdate.foodprice = req.body.foodprice;
+        let result = await toUpdate.save();
+        console.log("success "+ result);
+        res.send(result)
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id} failed}`);
+    }
 };
 
 
