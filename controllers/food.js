@@ -39,10 +39,23 @@ exports.food_create_post = async function(req,res){
         res.error(500,`{"error":${err}}`);
     }
 };
-// Handle Food delete form on DELETE.
-exports.food_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: Food delete DELETE ' + req.params.id);
+// // Handle Food delete form on DELETE.
+// exports.food_delete = function(req, res) {
+// res.send('NOT IMPLEMENTED: Food delete DELETE ' + req.params.id);
+// };
+// Handle Costume delete on DELETE.
+exports.food_delete = async function(req, res) {
+    console.log("delete "  + req.params.id)
+    try {
+        result = await Food.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
 };
+
 // Handle Food update form on PUT.
 exports.food_update_put = async function(req,res){
     console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
@@ -111,6 +124,18 @@ exports.food_update_Page =  async function(req, res) {
     try{
         let result = await Food.findById(req.query.id)
         res.render('foodupdate', { title: 'Food Update', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+// Handle a delete one view with id from query
+exports.food_delete_Page = async function(req, res) {
+    console.log("Delete view for id "  + req.query.id)
+    try{
+        result = await Food.findById(req.query.id)
+        res.render('fooddelete', { title: 'Food Delete', toShow: result });
     }
     catch(err){
         res.status(500)

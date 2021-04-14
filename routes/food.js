@@ -9,5 +9,5 @@ router.get('/detail', foodcontroller.food_view_one_Page);
 router.get('/create', foodcontroller.food_create_Page);
 /* GET create update page */
 router.get('/update', foodcontroller.food_update_Page);
-
+router.get('/delete', foodcontroller.food_delete_Page);
 module.exports = router;
