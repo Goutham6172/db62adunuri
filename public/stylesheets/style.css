@@ -7,8 +7,23 @@ a {
   color: #00B7FF;
 }
 
-
 .foodAttr {
   background-color: aquamarine;
-  width: 120px;
+  width: 180px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.foodRes {
+  background-color:aqua;
+  width: 200px;
+  padding: 10px;
+  margin-bottom: 10px;
+  color:black;
+  text-align: center;
+  border: 2px solid  blue;
+  border-radius: 5px;
 }
