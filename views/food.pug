@@ -7,7 +7,7 @@ block content
   div(class="row m-1")
     each f in food
       - let destination = `dispatch(\"/food/update?id=${f._id}\")`
-      div(class="row-sm-2", class="m-1") #{f.foodquantity} - #{f.foodprice} - #{f.foodcolor}
+      div(class="row-sm-2", class="m-1") #{f.foodquantity}(#{f.foodcolor}) is #{f.foodprice}        
         button.btn(class="btn-primary m1-1", onclick=destination) Update
   script.
       function dispatch(path)
