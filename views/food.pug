@@ -1,14 +1,23 @@
 extends layout
 
 block content
+  - let destination1 = `dispatch(\"/food/create")`
+  button.btn(class="btn-primary m1-1", onclick=destination1) Create
+
   h1= title
   - let food = results
   div(class="container-fluid mt-3")
   div(class="row m-1")
     each f in food
-      - let destination = `dispatch(\"/food/update?id=${f._id}\")`
-      div(class="row-sm-2", class="m-1") #{f.foodquantity}(#{f.foodcolor}) is #{f.foodprice}        
-        button.btn(class="btn-primary m1-1", onclick=destination) Update
+      - let destination2 = `dispatch(\"/food/update?id=${f._id}\")`
+      - let destination3 = `dispatch(\"/food/delete?id=${f._id}\")`
+      - let destination4 = `dispatch(\"/food/detail?id=${f._id}\")`
+
+      div(class="row-sm-2", class="m-1") #{f.foodquantity}(#{f.foodcolor}) is #{f.foodprice}
+      div(class="align-self-center")     
+        button.btn(class="btn-primary m1-1", onclick=destination2) Update
+        button.btn(class="btn-primary m1-1", onclick=destination3) Delete
+        button.btn(class="btn-primary m1-1", onclick=destination4) View
   script.
       function dispatch(path)
       {
